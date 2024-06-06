@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Calculator</title>
+    <style>
+        body {
+            background-color: lightcyan;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .input-field, .button {
+            margin: 10px;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            opacity: 0.8;
+        }
+        .button:last-of-type {
+            background-color: pink;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="number" id="hourlyValue" class="input-field" placeholder="Hourly Value">
+        <input type="number" id="workingHours" class="input-field" placeholder="Number of Working Hours">
+        <button class="button" onclick="calculateDailyIncome()">Calculate Daily Income</button>
+        <input type="number" id="taxDeductions" class="input-field" placeholder="Tax Deductions (%)">
+        <button class="button" onclick="calculateNetIncome()">Calculate Net Income</button>
+        <div id="results" class="input-field"></div>
+    </div>
+
+    <script>
+        function calculateDailyIncome() {
+            const hourlyValue = document.getElementById('hourlyValue').value;
+            const workingHours = document.getElementById('workingHours').value;
+            const dailyIncome = hourlyValue * workingHours;
+            document.getElementById('results').innerHTML = `Daily Income: $${dailyIncome.toFixed(2)}`;
+            return dailyIncome;
+        }
+
+        function calculateNetIncome() {
+            const dailyIncome = calculateDailyIncome();
+            const taxDeductions = document.getElementById('taxDeductions').value;
+            const netIncome = dailyIncome * (1 - (taxDeductions / 100));
+            document.getElementById('results').innerHTML += `<br>Net Income: $${netIncome.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
